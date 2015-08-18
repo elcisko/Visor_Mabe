@@ -1,0 +1,78 @@
+// Place all the styles related to the facturas controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+::-webkit-input-placeholder {
+  text-align: center;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+  text-align: center;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+  text-align: center;
+}
+
+:-ms-input-placeholder {
+  text-align: center;
+}
+
+h3   {
+  color:#58ACFA;
+}
+
+.btn-size{
+  width: 90px;
+}
+
+
+.digg_pagination {
+  background: white none repeat scroll 0 0;
+  cursor: default;
+}
+.digg_pagination a, .digg_pagination span, .digg_pagination em {
+  display: block;
+  float: left;
+  margin-right: 1px;
+  padding: 0.2em 0.5em;
+}
+.digg_pagination .disabled {
+  border: 1px solid #dddddd;
+  color: #999999;
+}
+.digg_pagination .current {
+  background: #2e6ab1 none repeat scroll 0 0;
+  border: 1px solid #2e6ab1;
+  color: white;
+  font-style: normal;
+  font-weight: bold;
+}
+.digg_pagination a {
+  border: 1px solid #9aafe5;
+  color: #105cb6;
+  text-decoration: none;
+}
+.digg_pagination a:hover, .digg_pagination a:focus {
+  border-color: #000033;
+  color: #000033;
+}
+.digg_pagination .page_info {
+  background: #2e6ab1 none repeat scroll 0 0;
+  color: white;
+  margin-bottom: 0.3em;
+  padding: 0.4em 0.6em;
+  text-align: center;
+  width: 22em;
+}
+.digg_pagination .page_info b {
+  background: #6aa6ed none repeat scroll 0 0;
+  color: #000033;
+  padding: 0.1em 0.25em;
+}
+.digg_pagination::after {
+  clear: both;
+  content: ".";
+  display: block;
+  height: 0;
+  visibility: hidden;
+}

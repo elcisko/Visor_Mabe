@@ -1,0 +1,74 @@
+<h2>Crear Usuario</h2>
+
+<%= form_for(@user, as: 'user', url: 'create') do |f| %>
+
+    <table border="1" width="80%">
+
+      <tr>
+
+        <td style="width: 60%">
+            <div class="field">
+              <%= f.label :email %><br />
+              <%= f.email_field :email, autofocus: true %>
+            </div>
+
+            <div class="field">
+              <%= f.label :password %>
+              <% if @minimum_password_length %>
+                  <em>(<%= @minimum_password_length %> characters minimum)</em>
+              <% end %><br />
+              <%= f.password_field :password, autocomplete: "off" %>
+            </div>
+
+            <div class="field">
+              <%= f.label :password_confirmation %><br />
+              <%= f.password_field :password_confirmation, autocomplete: "off" %>
+            </div>
+
+            <div class="field">
+                <%= f.label :Nomina %>&nbsp;&nbsp;&nbsp;
+                <%= f.check_box :nomina %>
+            </div>
+        </td>
+        <td>
+            <div class="field">
+
+                <%= label_tag "Sociedades"%>&nbsp;&nbsp;
+                <%= label_tag :Todos %>&nbsp;&nbsp;&nbsp;
+                <input type="checkbox" id="all_socs" class="todos">
+
+                <br>
+                <%#= collection_select(:society, :id, @societies, :codigo, :descripcion,{},{:multiple => true})%>
+                <select id="society_id" name="society[]" multiple="true">
+                  <% @societies.each do |soc| %>
+                      <option value="<%= soc.codigo %>-<%= soc.descripcion %>"><%= soc.descripcion %></option>
+                  <% end %>
+                </select>
+
+            </div>
+        </td>
+        <!--
+        <td>
+
+          <div class="field">
+            <%#= fields_for(@user_t_doc) do |us|%>
+                <%#= us.label "Tipo Documento"%>
+                <%#= f.label :Todos %>&nbsp;&nbsp;&nbsp;
+                <input type="checkbox" id="all_docs" class="todos">
+
+                <br>
+                <%#= collection_select(:type_document, :id, @type_documents, :id, :descripcion,{},{:multiple => true})%>
+            <%# end %>
+          </div>
+        </td>
+           -->
+      </tr>
+
+    </table>
+
+
+    <div class="actions">
+      <%= f.submit "Sign up" %>
+    </div>
+<% end %>
+

@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+
+  devise_for :users
+  root 'pages#home'
+
+  get 'users' => 'pages#users'
+  match 'users/new' => 'users#new', :as =>'users_new', via: 'get'
+  match 'users/create' => 'users#create', :as =>'users_create', via: 'post'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

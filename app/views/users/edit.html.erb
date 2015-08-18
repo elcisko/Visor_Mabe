@@ -1,0 +1,64 @@
+
+<h2>Editar Usuario</h2>
+
+<%= form_for(@user, as: 'user', action_name: 'x') do |f| %>
+
+    <table border="1" width="80%">
+
+      <tr>
+        <td style="width: 60%">
+
+          <%= f.hidden_field :id  %>
+          <div class="field">
+            <%= f.label :email %><br />
+            <%= f.email_field :email, autofocus: true %>
+          </div>
+
+          <div class="field">
+            <%= f.label :password %> <i>(dejar en blanco si no desea ser cambiado)</i><br />
+            <%= f.password_field :password, autocomplete: "off" %>
+          </div>
+
+          <div class="field">
+            <%= f.label :password_confirmation %><br />
+            <%= f.password_field :password_confirmation, autocomplete: "off" %>
+          </div>
+
+          <div class="field">
+            <%= f.label :current_password %> <i>(necesitamos su contraseña actual para confirmar los cambios)</i><br />
+            <%= f.password_field :current_password, autocomplete: "off" %>
+          </div>
+
+          <div class="field">
+            <%= f.label :Nomina %>&nbsp;&nbsp;&nbsp;
+            <%= f.check_box :nomina %>
+          </div>
+        </td>
+
+        <td>
+          <div class="field">
+
+            <%= label_tag "Sociedades"%>&nbsp;&nbsp;
+            <%= label_tag :Todos %>&nbsp;&nbsp;&nbsp;
+            <input type="checkbox" id="all_socs" class="todos">
+
+            <br>
+            <%#= collection_select(:society, :id, @societies, :codigo, :descripcion,{},{:multiple => true})%>
+            <select id="society_id" name="society[]" multiple="true">
+              <% @societies.each do |soc| %>
+                  <option value="<%= soc.codigo %>-<%= soc.descripcion %>"><%= soc.descripcion %></option>
+              <% end %>
+            </select>
+            <%= hidden_field_tag :asignadas, @soc_asignadas%>
+          </div>
+        </td>
+      </tr>
+
+    </table>
+
+  <div class="actions">
+    <%= f.submit "Update" %>
+  </div>
+<% end %>
+
+<%= link_to "Back", :back %>

@@ -8,7 +8,20 @@
 </head>
 <body>
 
-<%= yield %>
+<br>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<br>
+<%= render 'layouts/header' %>
+
+
+<% flash.each do |name, msg| %>
+    <%= content_tag(:div, msg, class: "alert alert-#{name}") %>
+<% end %>
+
+<div class="container">
+  <%= yield(:search) %>
+  <%= yield %>
+</div>
 
 </body>
 </html>

@@ -1,0 +1,28 @@
+
+<table class="table table-bordered table-hover" style="font-size:12px;">
+  <thead>
+  <tr>
+    <th>id</th>
+    <th>email</th>
+    <th>fecha creacion</th>
+  </tr>
+  </thead>
+  <tbody>
+  <td><%= @user.id %></td>
+  <td><%= @user.email %></td>
+  <td><%= @user.created_at %></td>
+  </tbody>
+</table>
+
+<table class="table table-bordered table-hover" style="font-size:12px;">
+  <thead>
+  <tr>
+    <th>rol</th>
+    <th>nomina</th>
+  </tr>
+  </thead>
+  <tbody>
+  <td><%= @user.role %></td>
+  <td><%= @user.nomina %></td>
+  </tbody>
+</table>
