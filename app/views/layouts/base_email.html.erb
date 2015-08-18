@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+</head>
+<body>
+<table class="currentTable" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#4f595b" align="center" data-module="1" data-bgcolor="body-bg-dark">
+  <tbody>
+  <tr>
+    <td>
+      <table class="devicewidth" width="600" cellspacing="0" cellpadding="0" border="0" align="center" data-bgcolor="light-gray-bg" style="background-color:#f8f8f8;">
+        <tbody>
+        <tr>
+          <td height="30" bgcolor="#4f595b"> </td>
+        </tr>
+        <tr>
+          <td bgcolor="#4f595b" align="left">
+            <% if @config %>
+              <img width="128"  alt="logo" src="http://23.253.32.140:8000/logo/<%= @config.logo %>">
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <td height="30" bgcolor="#4f595b"> </td>
+        </tr>
+        <tr>
+          <td class="editable" valign="middle" contenteditable="true" align="center" data-color="heading-color" data-bgcolor="heading-blue-bg" data-max="30" data-min="10" data-size="heading-text" style="color: rgb(255, 255, 255); font-family: Open Sans,Arial,Helvetica,sans-serif; font-size: 18px; font-weight: bold; text-transform: uppercase; padding: 20px 0px; background-color: rgb(66, 151, 211);"><%= @subject %></td>
+        </tr>
+        <tr>
+          <td height="40"> </td>
+        </tr>
+        <tr>
+          <td valign="middle" align="center" data-color="body-text" data-max="25" data-min="10" data-size="body-text" style="color:#444444; font-family:Open Sans, Arial, Helvetica, sans-serif; font-size:13px; line-height:20px; padding:0 20px;">
+            <%= yield %>
+          </td>
+        </tr>
+        <tr>
+          <td> </td>
+        </tr>
+        <tr>
+          <td valign="middle" align="center">
+          </td>
+        </tr>
+        <tr>
+          <td> </td>
+        </tr>
+        <tr>
+        </tr>
+        <tr>
+          <td> </td>
+        </tr>
+        <tr>
+          <td valign="middle" align="center" style="color:#444444; font-family:Open Sans, Arial, Helvetica, sans-serif; font-size:13px;">
+          </td>
+        </tr>
+        <tr>
+          <td> </td>
+        </tr>
+
+        <tr>
+          <td height="50"> </td>
+        </tr>
+        <tr>
+          <td height="30" bgcolor="#4f595b"> </td>
+        </tr>
+        <tr>
+          <td bgcolor="#4f595b" align="center">
+            <table width="100%" cellspacing="0" cellpadding="0" border="0" align="center">
+              <tbody>
+              <tr>
+                <!--<td valign="top" align="left" data-color="footer-text" data-max="25" data-min="10" data-size="body-text" style="color:#ffffff; font-family:Open Sans, Arial, Helvetica, sans-serif; font-size:13px;">© OwlSoftware SA de CV & BrilliantCode SA de CV 2014</td> -->
+                <% if @config %>
+                <td valign="top" align="right" data-color="footer-text" data-max="25" data-min="10" data-size="body-text" style="color:#ffffff; font-family:Open Sans, Arial, Helvetica, sans-serif; font-size:13px; line-height:20px;">
+                  <%= @config.address %>
+                  <br>
+                  <%= @config.phone_number %>
+                </td>
+                <% end %>
+              </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td height="50" bgcolor="#4f595b"> </td>
+        </tr>
+        </tbody>
+      </table>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

@@ -1,27 +1,276 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>VisorMabe</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <!--
+
+  TABLE OF CONTENTS.
+
+  Use search to find needed section.
+
+  =====================================================
+
+  |  1. $BODY                 |  Body                 |
+  |  2. $MAIN_NAVIGATION      |  Main navigation      |
+  |  3. $NAVBAR_ICON_BUTTONS  |  Navbar Icon Buttons  |
+  |  4. $MAIN_MENU            |  Main menu            |
+  |  5. $CONTENT              |  Content              |
+
+  =====================================================
+
+  -->
+
+
+  <!--[if IE 8]>         <html class="ie8"> <![endif]-->
+  <!--[if IE 9]>         <html class="ie9 gt-ie8"> <![endif]-->
+  <!--[if gt IE 9]><!--> <html class="gt-ie8 gt-ie9 not-ie"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Fiscalhub <%= yield(:title) %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : "Fiscalhub" %></title>
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Fiscalhub" %>">
+    <!-- Open Sans font from Google CDN -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin" rel="stylesheet" type="text/css">
+
+    <!-- Pixel Admin's stylesheets -->
+    <!--   <link href="assets/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="assets/stylesheets/pixel-admin.min.css" rel="stylesheet" type="text/css">
+    <link href="assets/stylesheets/widgets.min.css" rel="stylesheet" type="text/css">
+    <link href="assets/stylesheets/pages.min.css" rel="stylesheet" type="text/css">
+    <link href="assets/stylesheets/rtl.min.css" rel="stylesheet" type="text/css">
+    <link href="assets/stylesheets/themes.min.css" rel="stylesheet" type="text/css"> -->
+    <!--[if lt IE 9]>
+    <script src="assets/javascripts/ie.min.js"></script>
+    <![endif]-->
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+    
+    <%= csrf_meta_tags %>
+    <style>
+      .breadcrumb{
+        margin-bottom: 10px;
+      }
+      .page-header{
+        margin: 0 0 18px;
+      }
+      
+    </style>
+  </head>
+
+
+  <!-- 1. $BODY ======================================================================================
+  
+  Body
+
+  Classes:
+  * 'theme-{THEME NAME}'
+  * 'right-to-left'      - Sets text direction to right-to-left
+  * 'main-menu-right'    - Places the main menu on the right side
+  * 'no-main-menu'       - Hides the main menu
+  * 'main-navbar-fixed'  - Fixes the main navigation
+  * 'main-menu-fixed'    - Fixes the main menu
+  * 'main-menu-animated' - Animate main menu
+  -->
+  <body class="theme-default <% if user_signed_in? and (current_user.role == 'admin') %>main-menu-animated animate-mm-sm animate-mm-md animate-mm-lg <% else %> no-main-menu<% end %>">
+    <!-- no-main-menu -->
+    <script>var init = [];</script>
+    <div id="main-wrapper">
+    <!-- 2. $MAIN_NAVIGATION ===========================================================================
+    Main navigation
+    -->
+    <div id="main-navbar" class="navbar navbar-inverse" role="navigation">
+      <!-- Main menu toggle -->
+      <!--<button type="button" id="main-menu-toggle">
+        <i class="navbar-icon fa fa-bars icon"></i>
+        <span class="hide-menu-text">HIDE MENU</span>
+      </button>-->
+      <div class="navbar-inner">
+        <!-- Main navbar header -->
+        <div class="navbar-header">
+          <!-- Logo -->
+          <a href="http://www.fiscalhub.net" target="_blank">
+            <div><img height="50px" src="/assets/logo.png"></div>
+          </a>
+          <!-- Main navbar toggle -->
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar-collapse">
+            <i class="navbar-icon fa fa-bars"></i>
+          </button>
+        </div> <!-- / .navbar-header -->
+        <div id="main-navbar-collapse" class="collapse navbar-collapse main-navbar-collapse"><div>
+          <ul class="nav navbar-nav">
+            <li>
+              <% if user_signed_in? %>
+                <% if current_user.role == 'admin' or current_user.role == 'manager_account' %>
+                  <a href="/admin/index">Inicio</a>
+                <% else %>
+                  <%= link_to "Inicio", root_path %>  
+                <% end %>
+              <% else %>
+                <%= link_to "Inicio", root_path %>
+              <% end %>
+            </li>
+          </ul> <!-- / .navbar-nav -->
+
+          <div class="right clearfix">
+            <ul class="nav navbar-nav pull-right right-navbar-nav">
+
+            <!-- 3. $NAVBAR_ICON_BUTTONS =======================================================================
+
+              Navbar Icon Buttons
+
+              NOTE: .nav-icon-btn triggers a dropdown menu on desktop screens only. On small screens .nav-icon-btn acts like a hyperlink.
+
+              Classes:
+              * 'nav-icon-btn-info'
+              * 'nav-icon-btn-success'
+              * 'nav-icon-btn-warning'
+              * 'nav-icon-btn-danger'
+            -->
+              <li class="nav-icon-btn nav-icon-btn-danger dropdown">
+                <!-- <a href="#notifications" class="dropdown-toggle" data-toggle="dropdown">
+                  <span class="label">5</span>
+                  <i class="nav-icon fa fa-bullhorn"></i>
+                  <span class="small-screen-text">Notifications</span>
+                </a> -->
+
+                <!-- NOTIFICATIONS -->
+                
+                <!-- Javascript -->
+                <script>
+                  init.push(function () {
+                    $('#main-navbar-notifications').slimScroll({ height: 250 });
+                  });
+                </script>
+                <!-- / Javascript -->
+                <!-- /3. $END_NAVBAR_ICON_BUTTONS -->
+                <!--
+                <li>
+                  <form class="navbar-form pull-left">
+                    <input type="text" class="form-control" placeholder="Search">
+                  </form>
+                </li>
+                -->
+                <% if user_signed_in? %>
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle user-menu" data-toggle="dropdown">
+                      <img src="/assets/pixel/pixel-admin/avatar.png" alt="">
+                      <span><%= current_user.email %></span>
+                    </a>
+                    <ul class="dropdown-menu">
+
+                        <% if current_user.role == 'user' %>
+                          <li><%= link_to 'Editar Cuenta', edit_user_registration_path %></li>
+                          <% if current_user.provider_code != '' %>
+                            <li><%= link_to 'Pedidos', orders_path %></li>
+                          <% end %>
+                          <li class="divider"></li>
+                        <% end %>
+                      
+                      <li>
+                        <%= link_to 'Salir', destroy_user_session_path, :method=>'delete' %>
+                      </li>
+                    </ul>
+                  </li>
+
+                <% else %>
+                  <li>
+                    <%= link_to('Ingresar', new_user_session_path)  %>
+                  </li>
+                  <li>
+                    <%= link_to('Registrarse', '/users/sign_up/')  %>
+                  </li>
+                <% end  %>
+
+            </ul> <!-- / .navbar-nav -->
+          </div> <!-- / .right -->
+        </div>
+      </div> <!-- / #main-navbar-collapse -->
+    </div> <!-- / .navbar-inner -->
+  </div> <!-- / #main-navbar -->
+  <!-- /2. $END_MAIN_NAVIGATION -->
+
+
+  <!-- 4. $MAIN_MENU =================================================================================
+
+    Main menu
+    
+    Notes:
+    * to make the menu item active, add a class 'active' to the <li>
+      example: <li class="active">...</li>
+    * multilevel submenu example:
+      <li class="mm-dropdown">
+        <a href="#"><span class="mm-text">Submenu item text 1</span></a>
+        <ul>
+        <li>...</li>
+        <li class="mm-dropdown">
+          <a href="#"><span class="mm-text">Submenu item text 2</span></a>
+          <ul>
+          <li>...</li>
+          ...
+          </ul>
+        </li>
+        ...
+        </ul>
+      </li>
+  -->
+  <% if user_signed_in? %>
+    <% if current_user.role == 'admin' %>
+      <div id="main-menu" role="navigation">
+        <div id="main-menu-inner" style="overflow: hidden; width: auto; height: 100%;">
+          <div class="menu-content top animated fadeIn">
+              <div class="text-bg">
+                <span class="text-semibold" style="color: #fff;">Administrador</span>
+              </div>
+
+          </div>
+          <ul class="navigation">
+            <li>
+              <a href="/users/new">
+                <i class="menu-icon  fa fa-plus"></i>
+                <span class="mm-text mmc-dropdown-delay animated fadeIn">Crear Usuario</span>
+              </a>
+            </li>
+            <li>
+              <a href="/users">
+                <i class="menu-icon  fa fa-user"></i>
+                <span class="mm-text mmc-dropdown-delay animated fadeIn">Listar Usuarios</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+  <div id="content-wrapper">
+    <!-- 5. $CONTENT ===================================================================================
+    Content
+    -->
+    <%= yield %>
+
+  </div> <!-- / #content-wrapper -->
+  <% if user_signed_in? and (current_user.role == 'admin' or current_user.role == 'manager_account') %>
+    <div id="main-menu-bg"></div>
+  <% end %>
+</div> <!-- / #main-wrapper -->
+
+  <!-- <script src="jquery.transit.js"></script> -->
+  <!-- Pixel Admin's javascripts -->
+  <!-- <script src="assets/javascripts/bootstrap.min.js"></script>
+  <script src="assets/javascripts/pixel-admin.min.js"></script> -->
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  
+  <script type="text/javascript">
+      init.push(function () {
+        // Javascript code here
+      });
+      //window.PixelAdmin.start(init);
+      $(function() {
+          if ($('ol.breadcrumb').children().length ){
+              $("ol.breadcrumb").show();
+          }else{
+              $("ol.breadcrumb").hide();
+          }
 
-<br>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<br>
-<%= render 'layouts/header' %>
-
-
-<% flash.each do |name, msg| %>
-    <%= content_tag(:div, msg, class: "alert alert-#{name}") %>
-<% end %>
-
-<div class="container">
-  <%= yield(:search) %>
-  <%= yield %>
-</div>
-
+      });
+  </script>
 </body>
 </html>

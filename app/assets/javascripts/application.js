@@ -12,10 +12,14 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
-//= require bootstrap
-//= require bootstrap-sprockets
-//= require highcharts/highcharts
-//= require highcharts/highcharts-more
-//= require highcharts/highstock
+// require turbolinks
+// require bootstrap-sprockets
+//= require bootstrap.min
+//= require pixel/pixel-admin.min
+//= require bootstrap-taginput
+//= require jquery.form.min
+//= require jquery-block-ui
+// require bootbox.min
+//= require moment-with-local
+//= require bootstrap-datetimepicker
 //= require_tree .

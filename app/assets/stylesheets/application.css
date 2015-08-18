@@ -11,5 +11,10 @@
  * file per style scope.
  *
  *= require_tree .
+ *= require pixel/bootstrap-pixel.min.css
+ *= require pixel/pixel-admin.min.css
+ *= require pixel/rtl.min.css
+ *= require pixel/themes.min.css
+ *= require bootstrap-taginput.css
  *= require_self
  */

@@ -1,1 +1,5 @@
-@import 'bootstrap';
+// import the CSS framework
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+//body { font-family: 'Open Sans';}

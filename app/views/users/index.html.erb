@@ -10,7 +10,6 @@
               </td>
               <td>
                 <a href="<%= user.id %>" class="detalle_usuario btn btn-info btn-size">Ver</a>&nbsp;
-                <%#= link_to 'Ver', users_show_path(user), :class => "btn btn-info btn-size" %>&nbsp;
                 <%= link_to 'Editar', users_edit_path(user), :class => "btn btn-info btn-size" %>&nbsp;
                 <%= link_to 'Eliminar', user, method: :delete, data: { confirm: 'Desea eliminar este usuario?' },:class => "btn btn-info btn-size" %>
 
