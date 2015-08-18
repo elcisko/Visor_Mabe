@@ -28,29 +28,6 @@
             <%= f.label :current_password %> <i>(necesitamos su contraseña actual para confirmar los cambios)</i><br />
             <%= f.password_field :current_password, autocomplete: "off" %>
           </div>
-
-          <div class="field">
-            <%= f.label :Nomina %>&nbsp;&nbsp;&nbsp;
-            <%= f.check_box :nomina %>
-          </div>
-        </td>
-
-        <td>
-          <div class="field">
-
-            <%= label_tag "Sociedades"%>&nbsp;&nbsp;
-            <%= label_tag :Todos %>&nbsp;&nbsp;&nbsp;
-            <input type="checkbox" id="all_socs" class="todos">
-
-            <br>
-            <%#= collection_select(:society, :id, @societies, :codigo, :descripcion,{},{:multiple => true})%>
-            <select id="society_id" name="society[]" multiple="true">
-              <% @societies.each do |soc| %>
-                  <option value="<%= soc.codigo %>-<%= soc.descripcion %>"><%= soc.descripcion %></option>
-              <% end %>
-            </select>
-            <%= hidden_field_tag :asignadas, @soc_asignadas%>
-          </div>
         </td>
       </tr>
 

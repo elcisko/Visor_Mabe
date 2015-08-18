@@ -1,11 +1,19 @@
 Rails.application.routes.draw do
 
   devise_for :users
+  scope "/admin" do
+    resources :users
+  end
+
+  resources :users
   root 'pages#home'
 
   get 'users' => 'pages#users'
   match 'users/new' => 'users#new', :as =>'users_new', via: 'get'
   match 'users/create' => 'users#create', :as =>'users_create', via: 'post'
+
+  match 'users/show/:id' => 'users#show', :as =>'users_show', via: 'get'
+  match 'users/edit/:id' => 'users#edit', :as =>'users_edit', via: 'get'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
