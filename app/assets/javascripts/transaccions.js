@@ -20,14 +20,20 @@ $(function() {
         $("#filtros").hide();
     }
 
-    $(".btn-buscar").click(function(){
+    $("#btn_search").click(function(){
 
         if($("#cantidad").val() > 1000){
             alert("No puede realizar busquedas superiores a 1000 registros");
             return false;
         }else{
-            $("#factura_search").submit;
+            $("#btn_search").trigger("click");
         }
+    });
+
+    $(".sort").click(function(){
+        $("#sort_column").val($(this).attr('href'));
+        $("#search-form").submit();
+        return false;
     });
 
 });

@@ -16,6 +16,12 @@ class TransaccionsController < ApplicationController
     @cantidad =params[:cantidad]
     end
 
+    #columna y tipo de ordenamiento
+    if params.has_key?("sort_column")and !params[:sort_column].empty?
+      order_by = "#{params[:sort_column]} #{params[:sort_order]}"
+      @default_order = params[:sort_order] == 'desc' ? 'asc' : 'desc'
+    end
+
     @transaccions = apply_scopes(Transaccion).limit(@cantidad).select('distinct batch_id, status, tipo_transaccion').order(order_by).page(params[:page]).per(@por_pag)
     @count = apply_scopes(Transaccion).count('distinct batch_id')
 

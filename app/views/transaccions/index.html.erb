@@ -41,9 +41,9 @@
     <table border="0"  align="center" class="table table-bordered">
       <thead class="panel-heading">
         <tr>
-          <th width="40%">Batch</th>
-          <th width="20%">Status</th>
-          <th width="20%">Tipo transaccion</th>
+          <th width="40%"><a href="batch_id" class="sort">Batch <img src="/assets/<% if @default_order == 'desc'%>up.gif<% else %>down.gif<% end %>" /></a></th>
+          <th width="20%"><a href="status" class="sort">Status <img src="/assets/<% if @default_order == 'desc'%>up.gif<% else %>down.gif<% end %>" /></a></th>
+          <th width="20%"><a href="tipo_transaccion" class="sort">Tipo transaccion <img src="/assets/<% if @default_order == 'desc'%>up.gif<% else %>down.gif<% end %>" /></a></th>
           <th width="20%">Detalle</th>
         </tr>
       </thead>
