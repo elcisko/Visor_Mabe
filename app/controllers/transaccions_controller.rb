@@ -1,5 +1,6 @@
 class TransaccionsController < ApplicationController
 
+  before_action :authenticate_user!
   before_action :set_transaccion, only: [:show, :edit, :update, :destroy]
   has_scope :batch_id, :external_id, :status, :tipo_transaccion, allow_blank: false, only: :index
   layout false, :only => [:detalle, :payload, :detalle_pendiente]
@@ -23,7 +24,7 @@ class TransaccionsController < ApplicationController
       @default_order = params[:sort_order] == 'desc' ? 'asc' : 'desc'
     end
 
-    @transaccions = apply_scopes(Transaccion).limit(@cantidad).select('distinct batch_id, status, tipo_transaccion').order(order_by).page(params[:page]).per(@por_pag)
+    @transaccions = apply_scopes(Transaccion).limit(@cantidad).select('distinct batch_id, status, tipo_transaccion').where('batch_id IS NOT NULL').order(order_by).page(params[:page]).per(@por_pag)
     @count = apply_scopes(Transaccion).count('distinct batch_id')
 
     if @count.to_i > @cantidad.to_i

@@ -235,13 +235,13 @@
               <% end %>
               <li>
                 <a href="/transaccions">
-                  <i class="menu-icon  fa fa-bars"></i>
+                  <i class="menu-icon  fa fa-share-square"></i>
                   <span class="mm-text mmc-dropdown-delay animated fadeIn">Transacciones Enviadas</span>
                 </a>
               </li>
               <li>
                 <a href="/transaccions/pendientes/0">
-                  <i class="menu-icon  fa fa-bars"></i>
+                  <i class="menu-icon  fa fa-exclamation-triangle"></i>
                   <span class="mm-text mmc-dropdown-delay animated fadeIn">Transacciones Por Enviar</span>
                 </a>
               </li>
@@ -254,6 +254,9 @@
     <!-- 5. $CONTENT ===================================================================================
     Content
     -->
+    <% flash.each do |name, msg| %>
+        <%= content_tag(:div, msg, class: "alert alert-#{name}") %>
+    <% end %>
     <%= yield %>
 
   </div> <!-- / #content-wrapper -->

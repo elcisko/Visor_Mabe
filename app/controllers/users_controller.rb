@@ -34,13 +34,11 @@ class UsersController < ApplicationController
       if @pass
         @result = @user.update(:email => params[:user][:email],
                      :password => params[:user][:password],
-                     :password_confirmation => params[:user][:password_confirmation],
-                     :nomina => params[:user][:nomina])
+                     :password_confirmation => params[:user][:password_confirmation])
       else
         @result = @user.update_without_password(:email => params[:user][:email],
                                :password => params[:user][:password],
-                               :password_confirmation => params[:user][:password_confirmation],
-                               :nomina => params[:user][:nomina])
+                               :password_confirmation => params[:user][:password_confirmation])
       end
 
        #raise ActiveRecord::Rollback
@@ -48,14 +46,13 @@ class UsersController < ApplicationController
       @user.errors.add(:current_password, 'Password actual incorrecto' )
     end
 
-   # @user.save
+    @user.save
 
     respond_to do |format|
       if @result
         format.html { redirect_to users_url, notice: 'Usuario actualizado' }
         format.json { render :show, status: :ok, location: @user }
       else
-        set_societies
         format.html { render :edit }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
