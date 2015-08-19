@@ -1,14 +1,14 @@
 class TransaccionsController < ApplicationController
   before_action :set_transaccion, only: [:show, :edit, :update, :destroy]
   has_scope :batch_id, :external_id, allow_blank: false, only: :index
-  layout false, :only => [:detalle]
+  layout false, :only => [:detalle, :payload]
 
   # GET /transaccions
   # GET /transaccions.json
   def index
 
     @default_order = 'desc'
-    @por_pag = 2
+    @por_pag = 25
     order_by = ''
     if !params[:cantidad].present?
       @cantidad = 100
@@ -16,10 +16,8 @@ class TransaccionsController < ApplicationController
     @cantidad =params[:cantidad]
     end
 
-    #@transaccions = apply_scopes(Transaccion).distinct(:batch_id).limit(@cantidad).order(order_by).page(params[:page]).per(25)
-    #@transaccions = Transaccion.select(:batch_id).distinct.(:status).(:tipo_transaccion).limit(@cantidad).order(order_by).page(params[:page]).per(@por_pag)
-    @transaccions = Transaccion.select('distinct batch_id, status, tipo_transaccion').limit(@cantidad).order(order_by).page(params[:page]).per(@por_pag)
-    @count = Transaccion.count('distinct batch_id')
+    @transaccions = apply_scopes(Transaccion).limit(@cantidad).select('distinct batch_id, status, tipo_transaccion').order(order_by).page(params[:page]).per(@por_pag)
+    @count = apply_scopes(Transaccion).count('distinct batch_id')
 
     if @count.to_i > @cantidad.to_i
 
@@ -33,19 +31,29 @@ class TransaccionsController < ApplicationController
       @total_pages = @res.to_i
     end
 
-    puts @transaccions.size
+    #puts @transaccions.size
     #total de la pagina
-    puts @transaccions.count
+    #puts @transaccions.count
     # pagina que se va a mostar
-    puts @transaccions.current_page
-
-    puts @count
+    #puts @transaccions.current_page
+    #cantidad de resultados encontrados
+    #puts @count
 
 
       url_for(params.except(:obsolete_param_name))
   end
 
   def detalle
+
+    @batch_id = params[:id]
+
+    @transaccions = Transaccion.where(batch_id: params[:id])
+
+  end
+
+  def payload
+
+    @transaccion = Transaccion.find(params[:id])
 
   end
 

@@ -11,6 +11,7 @@ $(function() {
         return false;
     });
 
+
     $("#bt_plus_filter").click(function(){
         $("#filtros").toggle();
     });
@@ -30,3 +31,9 @@ $(function() {
     });
 
 });
+
+function detalle_payload(id){
+    $(".modal-body.payload").load("/transaccions/payload/" + id);
+    $("#modal-detalle-payload").modal('show');
+    return false;
+}

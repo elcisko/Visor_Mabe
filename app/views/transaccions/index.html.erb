@@ -1,65 +1,42 @@
 <div class="col-md-12 panel panel-default">
 
-  <h3 align="center"><b>Transacciones</b></h3>
+  <h3 align="center"><b>Transacciones</b></h3><br>
+
+</div>
+
+<div class="col-md-12 panel panel-default">
+
+  <%= form_tag( transaccions_path, method: "get", id:"search-form" ) do  %>
+      <h5>Cantidad de Registros consultados&nbsp;&nbsp;<%= text_field_tag "cantidad", @cantidad, :size => 10, :maxlenght => 4, :placeholder => "Cantidad", :required => "required" %>&nbsp;&nbsp;(Máximo 1000 por consulta)</h5>
+
+      <div class="panel panel-default">
+
+        <div id="bt_plus_filter" class="panel-heading">
+          <h5>Filtros de Búsqueda &nbsp;&nbsp;<span class="menu-icon  fa fa-plus" aria-hidden="true" id=""></span></h5>
+        </div>
+
+        <div id="filtros" style="display:none;" class="panel-footer" align="center">
+
+          <%= text_field_tag :batch_id, params[:batch_id], class: "", placeholder: "Identificador Batch", :size => 50 %>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <%= text_field_tag :external_id, params[:external_id], class: "", placeholder: "Identificador Externo", :size => 50 %>
+          <%= hidden_field_tag :sort_order, @default_order %>
+          <%= hidden_field_tag :sort_column %>
+          <br>
+        </div>
+      </div>
+      <button class="btn btn-default btn-lg btn-block" id="btn_search">Buscar</button><br>
+      <%#= f.submit "Buscar", class: " btn btn-default btn-lg btn-block" %>
+      <!--  <a href="/facturas" class="btn btn-default">Reset</a> -->
+  <% end %>
+</div>
+
+
+<div class="col-md-12 panel panel-default">
+
+  <h3 align="center"><b>Resultados</b></h3>
 
   <br>  <br>
-  <div class="panel panel-default">
-
-    <% content_for :search do %>
-        <div class="large-8 small-9 columns form-group">
-
-          <h2><b><span class="label label-primary" style="background-color: #5bc0de">Búsqueda de Facturas</span></b></h2><br>
-
-          <%= form_tag( facturas_path, method: "get", id:"search-form" ) do  %>
-              <h5>Cantidad de Registros consultados&nbsp;&nbsp;<%= text_field_tag "cantidad", @cantidad, :size => 10, :maxlenght => 4, :placeholder => "Cantidad", :required => "required" %>&nbsp;&nbsp;(Máximo 1000 por consulta)</h5>
-
-              <div class="panel panel-default">
-
-                <div id="bt_plus_filter" class="panel-heading">
-                  <h5>Filtros de Búsqueda &nbsp;&nbsp;<span class="glyphicon glyphicon-plus" aria-hidden="true" id=""></span></h5>
-                </div>
-
-                <div id="filtros" style="display:none;" class="panel-footer">
-                  <br>
-                  <%= text_field_tag :q_UUID, params[:q_UUID], class: "", placeholder: "UUID", :size => 27 %>
-                  <%= text_field_tag :q_RS_origen, params[:RS_origen], class: "", placeholder: "Descripcion", :size => 27 %>
-                  <% if current_user.role == 'admin' %>
-                      <%= text_field_tag :soc_id, params[:soc_id], class: "", placeholder: "Sociedad", :size => 27 %>
-                  <% else %>
-                      <%#= f.select(:soc_id, @societies.collect { |s| [s.descripcion, s.codigo] }, {prompt: 'Seleccione una Sociedad'}) %>
-                  <% end %>
-
-                  <%= text_field_tag :monto, params[:monto], class: "", placeholder: "Monto", :size => 27 %>
-                  <%= text_field_tag :referencia_id, params[:referencia_id], class: "", placeholder: "Referencia", :size => 27 %>
-                  <%= hidden_field_tag :sort_order, @default_order %>
-                  <%= hidden_field_tag :sort_column %>
-                  <br><br>
-
-                  <table border="0" style="width: 100%">
-                    <tr>
-                      <td width="50%">
-                        <h5>Rango de Fecha Emisión</h5>
-                        <%= text_field_tag :fecha_inicio_i, params[:fecha_inicio_i], class: "datepicker f_inicio", placeholder: "Inicio", :size => 27 %>
-                        <%= text_field_tag :fecha_inicio_f, params[:fecha_inicio_f], class: "datepicker f_fin", placeholder: "Fin", :size => 27 %>
-                      </td>
-                      <td>
-                        <h5>Rango de Montos</h5>
-                        <%= text_field_tag :monto_i, params[:monto_i], class: "", placeholder: "Monto Minimo", :size => 27 %>
-                        <%= text_field_tag :monto_f, params[:monto_f], class: "", placeholder: "Monto Máximo", :size => 27 %>
-                      </td>
-                    </tr>
-                  </table>
-                  <br>
-                </div>
-              </div>
-              <button class="btn btn-default btn-lg btn-block" id="btn_search">Buscar</button>
-              <%#= f.submit "Buscar", class: " btn btn-default btn-lg btn-block" %>
-              <!--  <a href="/facturas" class="btn btn-default">Reset</a> -->
-          <% end %>
-        </div>
-    <% end %>
-
-  </div>
 
     <table border="0"  align="center" class="table table-bordered">
       <thead class="panel-heading">
@@ -92,7 +69,7 @@
 </div>
 
 <!-- modal de detalle -->
-<div id="modal-detalle-transaccion" class="modal fade" style="display: none;" role="dialog" tabindex="-1" aria-hidden="true">
+<div id="modal-detalle-transaccion" data-focus-on="input:first" class="modal fade" style="display: none;" role="dialog" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog" style="z-index:1500; width: 750px;">
     <div class="modal-content">
       <div class="modal-header">
@@ -100,6 +77,21 @@
         <h4 class="modal-title">Detalle Transacci&oacute;n</h4>
       </div>
       <div class="modal-body transaccion">
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- modal de payload -->
+<div id="modal-detalle-payload" data-focus-on="input:first" class="modal fade" style="display: none;" role="dialog" tabindex="-1" aria-hidden="false">
+  <div class="modal-dialog" style="z-index:3000; width: 750px;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" aria-hidden="false" data-dismiss="modal" type="button">×</button>
+        <h4 class="modal-title">Payload Transacci&oacute;n</h4>
+      </div>
+      <div class="modal-body payload">
 
       </div>
     </div>

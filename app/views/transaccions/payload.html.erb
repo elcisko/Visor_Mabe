@@ -1,0 +1,16 @@
+
+<div class="col-md-12 panel panel-default">
+
+    <div class="panel-heading">
+        <h4 align="center">
+          <b>   Id Transacci&oacute;n: &nbsp; <%= @transaccion.id %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                External Id: &nbsp; <%= @transaccion.external_id %><br><br>
+                Batch Id: &nbsp; <%= @transaccion.batch_id %>
+          </b>
+        </h4>
+    </div>
+    <div class="panel-body">
+          <%= @transaccion.payload %>
+    </div>
+
+</div>
