@@ -1,6 +1,6 @@
 class TransaccionsController < ApplicationController
   before_action :set_transaccion, only: [:show, :edit, :update, :destroy]
-  has_scope :batch_id, :external_id, allow_blank: false, only: :index
+  has_scope :batch_id, :external_id, :status, allow_blank: false, only: :index
   layout false, :only => [:detalle, :payload]
 
   # GET /transaccions

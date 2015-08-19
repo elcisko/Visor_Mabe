@@ -16,8 +16,10 @@ $(function() {
         $("#filtros").toggle();
     });
 
-    if($("#total").html() == 0){
+    if($(".total_transaccion").html() == 0){
         $("#filtros").hide();
+    }else{
+        $("#filtros").show();
     }
 
     $("#btn_search").click(function(){

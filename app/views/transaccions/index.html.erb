@@ -18,8 +18,11 @@
         <div id="filtros" style="display:none;" class="panel-footer" align="center">
 
           <%= text_field_tag :batch_id, params[:batch_id], class: "", placeholder: "Identificador Batch", :size => 50 %>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;
           <%= text_field_tag :external_id, params[:external_id], class: "", placeholder: "Identificador Externo", :size => 50 %>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <%= text_field_tag :status, params[:status], class: "", placeholder: "Estatus", :size => 50 %>
+
           <%= hidden_field_tag :sort_order, @default_order %>
           <%= hidden_field_tag :sort_column %>
           <br>
@@ -51,7 +54,7 @@
       <tbody class="panel-body">
         <% @transaccions.each do |transaccion| %>
           <tr>
-            <td><%= transaccion.batch_id %></td>
+            <td><a href="C:\Users\HOME\Documents\fiscalhub\" download="Ordenes_<%= transaccion.batch_id %>.csv"><%= transaccion.batch_id %></a></td>
             <td><%= transaccion.status %></td>
             <td><%= transaccion.tipo_transaccion %></td>
             <td><a href="<%= transaccion.batch_id %>" class="detalle_transacc btn btn-info" style="background-color: #1d89cf; border-color: #1d89cf;">Ver</a> </td>
@@ -64,7 +67,7 @@
 <br>
 
 <div style="text-align: right;">
-  <%= label_tag :total %>&nbsp;&nbsp;<%= label_tag @count%>
+  <%= label_tag :total %>&nbsp;&nbsp;<%= label_tag @count, nil, class: "total_transaccion" %>
   <%= paginate @transaccions, :total_pages => @total_pages %>
 </div>
 
