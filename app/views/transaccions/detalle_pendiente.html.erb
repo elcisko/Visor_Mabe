@@ -1,13 +1,12 @@
 <div class="col-md-12 panel panel-default">
 
-  <h3 align="center"><b>Batch Id &nbsp;&nbsp; <%= @batch_id %></b></h3>
+  <h3 align="center"><b>External Id &nbsp;&nbsp; <%= @batch_id %></b></h3>
 
   <br>  <br>
 
   <table border="0"  align="center" class="table table-bordered">
     <thead class="panel-heading">
     <tr>
-      <th>Identificador Externo</th>
       <th>Record Id</th>
       <th>Ejecucion</th>
       <th>Status</th>
@@ -21,7 +20,6 @@
     <tbody class="panel-body">
     <% @transaccions.each do |transaccion| %>
         <tr>
-          <td><%= transaccion.external_id %></td>
           <td><%= transaccion.record_id %></td>
           <td><%= transaccion.ejecucion %></td>
           <td><%= transaccion.status %></td>

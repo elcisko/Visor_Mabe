@@ -1,12 +1,12 @@
 <div class="col-md-12 panel panel-default">
 
-  <h3 align="center"><b>Transacciones Enviadas</b></h3><br>
+  <h3 align="center"><b>Transacciones Por Enviar</b></h3><br>
 
 </div>
 
 <div class="col-md-12 panel panel-default">
 
-  <%= form_tag( transaccions_path, method: "get", id:"search-form" ) do  %>
+  <%= form_tag( transaccions_pendientes_path(0), method: "get", id:"search-form" ) do  %>
       <h5>Cantidad de Registros consultados&nbsp;&nbsp;<%= text_field_tag "cantidad", @cantidad, :size => 10, :maxlenght => 4, :placeholder => "Cantidad", :required => "required" %>&nbsp;&nbsp;(Máximo 1000 por consulta)</h5>
 
       <div class="panel panel-default">
@@ -17,14 +17,11 @@
 
         <div id="filtros" style="display:none;" class="panel-footer" align="center">
 
-          <%= text_field_tag :batch_id, params[:batch_id], class: "", placeholder: "Identificador Batch", :size => 40 %>
+          <%= text_field_tag :external_id, params[:external_id], class: "", placeholder: "Identificador Externo", :size => 50 %>
           &nbsp;&nbsp;&nbsp;&nbsp;
-          <%= text_field_tag :external_id, params[:external_id], class: "", placeholder: "Identificador Externo", :size => 40 %>
+          <%= text_field_tag :status, params[:status], class: "", placeholder: "Estatus", :size => 50 %>
           &nbsp;&nbsp;&nbsp;&nbsp;
-          <%= text_field_tag :status, params[:status], class: "", placeholder: "Estatus", :size => 40 %>
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          <%= text_field_tag :tipo_transaccion, params[:tipo_transaccion], class: "", placeholder: "Tipo Transaccion", :size => 40 %>
-
+          <%= text_field_tag :tipo_transaccion, params[:tipo_transaccion], class: "", placeholder: "Tipo Transaccion", :size => 50 %>
 
           <%= hidden_field_tag :sort_order, @default_order %>
           <%= hidden_field_tag :sort_column %>
@@ -44,33 +41,27 @@
 
   <br>  <br>
 
-    <table border="0"  align="center" class="table table-bordered">
-      <thead class="panel-heading">
-        <tr>
-          <th width="40%"><a href="batch_id" class="sort">Batch <img src="/assets/<% if @default_order == 'desc'%>up.gif<% else %>down.gif<% end %>" /></a></th>
-          <th width="20%"><a href="status" class="sort">Status <img src="/assets/<% if @default_order == 'desc'%>up.gif<% else %>down.gif<% end %>" /></a></th>
-          <th width="20%"><a href="tipo_transaccion" class="sort">Tipo transaccion <img src="/assets/<% if @default_order == 'desc'%>up.gif<% else %>down.gif<% end %>" /></a></th>
-          <th width="20%">Detalle</th>
-        </tr>
-      </thead>
+  <table border="0"  align="center" class="table table-bordered">
+    <thead class="panel-heading">
+    <tr>
+      <th width="25%"><a href="external_id" class="sort">External Id <img src="/assets/<% if @default_order == 'desc'%>up.gif<% else %>down.gif<% end %>" /></a></th>
+      <th width="25%"><a href="status" class="sort">Status <img src="/assets/<% if @default_order == 'desc'%>up.gif<% else %>down.gif<% end %>" /></a></th>
+      <th width="25%"><a href="tipo_transaccion" class="sort">Tipo transaccion <img src="/assets/<% if @default_order == 'desc'%>up.gif<% else %>down.gif<% end %>" /></a></th>
+      <th width="25%">Detalle</th>
+    </tr>
+    </thead>
 
-      <tbody class="panel-body">
-        <% @transaccions.each do |transaccion| %>
-          <tr>
-            <td>
-              <%if File.exist?(Rails.root.join('public/archivos', "Ordenes_#{transaccion.batch_id}.csv")) %>
-                <%= link_to transaccion.batch_id, :action=> :download, :file_name => "Ordenes_#{transaccion.batch_id}", :style => "background-color: #1d89cf; border-color: #1d89cf;"%>
-              <% else %>
-                  <%= transaccion.batch_id %>
-              <%end%>
-            </td>
-            <td><%= transaccion.status %></td>
-            <td><%= transaccion.tipo_transaccion %></td>
-            <td><a href="<%= transaccion.batch_id %>" class="detalle_transacc btn btn-info" style="background-color: #1d89cf; border-color: #1d89cf;">Ver</a> </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+    <tbody class="panel-body">
+    <% @transaccions.each do |transaccion| %>
+        <tr>
+          <td><%= transaccion.external_id %></td>
+          <td><%= transaccion.status %></td>
+          <td><%= transaccion.tipo_transaccion %></td>
+          <td><a href="<%= transaccion.external_id %>" class="detalle_externo btn btn-info" style="background-color: #1d89cf; border-color: #1d89cf;">Ver</a> </td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
 </div>
 
 <br>
@@ -81,14 +72,14 @@
 </div>
 
 <!-- modal de detalle -->
-<div id="modal-detalle-transaccion" data-focus-on="input:first" class="modal fade" style="display: none;" role="dialog" tabindex="-1" aria-hidden="true">
+<div id="modal-detalle-pendiente" data-focus-on="input:first" class="modal fade" style="display: none;" role="dialog" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog" style="z-index:1500; width: 750px;">
     <div class="modal-content">
       <div class="modal-header">
         <button class="close" aria-hidden="true" data-dismiss="modal" type="button">×</button>
         <h4 class="modal-title">Detalle Transacci&oacute;n</h4>
       </div>
-      <div class="modal-body transaccion">
+      <div class="modal-body pendiente">
 
       </div>
     </div>

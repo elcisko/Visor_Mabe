@@ -1,7 +1,8 @@
 class TransaccionsController < ApplicationController
+
   before_action :set_transaccion, only: [:show, :edit, :update, :destroy]
-  has_scope :batch_id, :external_id, :status, allow_blank: false, only: :index
-  layout false, :only => [:detalle, :payload]
+  has_scope :batch_id, :external_id, :status, :tipo_transaccion, allow_blank: false, only: :index
+  layout false, :only => [:detalle, :payload, :detalle_pendiente]
 
   # GET /transaccions
   # GET /transaccions.json
@@ -45,7 +46,6 @@ class TransaccionsController < ApplicationController
     #cantidad de resultados encontrados
     #puts @count
 
-
       url_for(params.except(:obsolete_param_name))
   end
 
@@ -54,6 +54,65 @@ class TransaccionsController < ApplicationController
     @batch_id = params[:id]
 
     @transaccions = Transaccion.where(batch_id: params[:id])
+
+  end
+
+  def detalle_pendiente
+
+    @batch_id = params[:id]
+
+    @transaccions = Transaccion.where(external_id: params[:id])
+
+  end
+
+  def pendientes
+
+    @default_order = 'desc'
+    @por_pag = 25
+    order_by = ''
+    if !params[:cantidad].present?
+      @cantidad = 100
+    elsif
+    @cantidad =params[:cantidad]
+    end
+
+    #columna y tipo de ordenamiento
+    if params.has_key?("sort_column")and !params[:sort_column].empty?
+      order_by = "#{params[:sort_column]} #{params[:sort_order]}"
+      @default_order = params[:sort_order] == 'desc' ? 'asc' : 'desc'
+    end
+
+    @transaccions = apply_scopes(Transaccion).limit(@cantidad).select('distinct external_id, status, tipo_transaccion').where('batch_id IS NULL').order(order_by).page(params[:page]).per(@por_pag)
+    @count = apply_scopes(Transaccion).where('batch_id IS NULL').count('distinct external_id')
+
+    if @count.to_i > @cantidad.to_i
+
+      @total_pages = @cantidad.to_i / @por_pag
+
+    elsif @count.to_i < @por_pag
+
+      @total_pages = 1
+    else
+      @res = redondear(@count.to_f / @por_pag)
+      @total_pages = @res.to_i
+    end
+
+    #puts @transaccions.size
+    #total de la pagina
+    #puts @transaccions.count
+    # pagina que se va a mostar
+    #puts @transaccions.current_page
+    #cantidad de resultados encontrados
+    #puts @count
+
+
+    url_for(params.except(:obsolete_param_name))
+  end
+
+
+  def download
+    @archivo = Rails.root.join('public/archivos', "#{params[:file_name]}.csv")
+    send_file @archivo
 
   end
 

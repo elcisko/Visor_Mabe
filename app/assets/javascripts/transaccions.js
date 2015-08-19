@@ -11,6 +11,13 @@ $(function() {
         return false;
     });
 
+    $(".detalle_externo").click(function(){
+        var id = $(this).attr('href');
+        $( ".modal-body.pendiente" ).load( "/transaccions/detalle_pendiente/" + id);
+        $("#modal-detalle-pendiente").modal('show');
+        return false;
+    });
+
 
     $("#bt_plus_filter").click(function(){
         $("#filtros").toggle();

@@ -203,58 +203,53 @@
       </li>
   -->
   <% if user_signed_in? %>
-    <% if current_user.role == 'admin' %>
+
       <div id="main-menu" role="navigation">
         <div id="main-menu-inner" style="overflow: hidden; width: auto; height: 100%;">
           <div class="menu-content top animated fadeIn">
-              <div class="text-bg">
-                <span class="text-semibold" style="color: #fff;">Administrador</span>
-              </div>
-
-          </div>
-          <ul class="navigation">
-            <li>
-              <a href="/users/new">
-                <i class="menu-icon  fa fa-plus"></i>
-                <span class="mm-text mmc-dropdown-delay animated fadeIn">Crear Usuario</span>
-              </a>
-            </li>
-            <li>
-              <a href="/users">
-                <i class="menu-icon  fa fa-user"></i>
-                <span class="mm-text mmc-dropdown-delay animated fadeIn">Listar Usuarios</span>
-              </a>
-            </li>
-            <li>
-              <a href="/transaccions">
-                <i class="menu-icon  fa fa-bars"></i>
-                <span class="mm-text mmc-dropdown-delay animated fadeIn">Transacciones</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    <% else %>
-          <div id="main-menu" role="navigation">
-            <div id="main-menu-inner" style="overflow: hidden; width: auto; height: 100%;">
-              <div class="menu-content top animated fadeIn">
-                <div class="text-bg">
-                  <span class="text-semibold" style="color: #fff;">Men&uacute;</span>
-                </div>
-
-              </div>
-              <ul class="navigation">
-                <li>
-                  <a href="/transaccions">
-                    <i class="menu-icon  fa fa-bars"></i>
-                    <span class="mm-text mmc-dropdown-delay animated fadeIn">Transacciones</span>
-                  </a>
-                </li>
-              </ul>
+            <div class="text-bg">
+              <span class="text-semibold" style="color: #fff;">
+                <% if current_user.role == 'admin' %>
+                    Administrador
+                <% else %>
+                    Men&uacute;
+                <% end %>
+              </span>
             </div>
+
           </div>
-      <% end %>
+            <ul class="navigation">
+              <% if current_user.role == 'admin' %>
+                  <li>
+                    <a href="/users/new">
+                      <i class="menu-icon  fa fa-plus"></i>
+                      <span class="mm-text mmc-dropdown-delay animated fadeIn">Crear Usuario</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/users">
+                      <i class="menu-icon  fa fa-user"></i>
+                      <span class="mm-text mmc-dropdown-delay animated fadeIn">Listar Usuarios</span>
+                    </a>
+                  </li>
+              <% end %>
+              <li>
+                <a href="/transaccions">
+                  <i class="menu-icon  fa fa-bars"></i>
+                  <span class="mm-text mmc-dropdown-delay animated fadeIn">Transacciones Enviadas</span>
+                </a>
+              </li>
+              <li>
+                <a href="/transaccions/pendientes/0">
+                  <i class="menu-icon  fa fa-bars"></i>
+                  <span class="mm-text mmc-dropdown-delay animated fadeIn">Transacciones Por Enviar</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
   <% end %>
+
   <div id="content-wrapper">
     <!-- 5. $CONTENT ===================================================================================
     Content
