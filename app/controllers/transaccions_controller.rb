@@ -1,10 +1,52 @@
 class TransaccionsController < ApplicationController
   before_action :set_transaccion, only: [:show, :edit, :update, :destroy]
+  has_scope :batch_id, :external_id, allow_blank: false, only: :index
+  layout false, :only => [:detalle]
 
   # GET /transaccions
   # GET /transaccions.json
   def index
-    @transaccions = Transaccion.all
+
+    @default_order = 'desc'
+    @por_pag = 2
+    order_by = ''
+    if !params[:cantidad].present?
+      @cantidad = 100
+    elsif
+    @cantidad =params[:cantidad]
+    end
+
+    #@transaccions = apply_scopes(Transaccion).distinct(:batch_id).limit(@cantidad).order(order_by).page(params[:page]).per(25)
+    #@transaccions = Transaccion.select(:batch_id).distinct.(:status).(:tipo_transaccion).limit(@cantidad).order(order_by).page(params[:page]).per(@por_pag)
+    @transaccions = Transaccion.select('distinct batch_id, status, tipo_transaccion').limit(@cantidad).order(order_by).page(params[:page]).per(@por_pag)
+    @count = Transaccion.count('distinct batch_id')
+
+    if @count.to_i > @cantidad.to_i
+
+      @total_pages = @cantidad.to_i / @por_pag
+
+    elsif @count.to_i < @por_pag
+
+      @total_pages = 1
+    else
+      @res = redondear(@count.to_f / @por_pag)
+      @total_pages = @res.to_i
+    end
+
+    puts @transaccions.size
+    #total de la pagina
+    puts @transaccions.count
+    # pagina que se va a mostar
+    puts @transaccions.current_page
+
+    puts @count
+
+
+      url_for(params.except(:obsolete_param_name))
+  end
+
+  def detalle
+
   end
 
   # GET /transaccions/1
@@ -70,5 +112,16 @@ class TransaccionsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def transaccion_params
       params.require(:transaccion).permit(:id, :external_id, :record_id, :batch_id, :payload, :ejecucion, :status, :tipo_transaccion, :source_id, :target_id)
+    end
+
+    # 3.5 se redondeará a 4 pero 3.4 se redondeará a 4
+    def redondear(num)
+      base = num.floor
+      fraction = num - base
+      if fraction > 0
+        base+1
+      else
+        num.round
+      end
     end
 end

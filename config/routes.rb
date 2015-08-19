@@ -16,6 +16,10 @@ Rails.application.routes.draw do
   match 'users/show/:id' => 'users#show', :as =>'users_show', via: 'get'
   match 'users/edit/:id' => 'users#edit', :as =>'users_edit', via: 'get'
 
+
+  resources :transaccions
+  match 'transaccions/detalle/:id' => 'transaccions#detalle', :as =>'transaccions_detalle', via: 'get'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

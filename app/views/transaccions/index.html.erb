@@ -1,45 +1,107 @@
-<p id="notice"><%= notice %></p>
+<div class="col-md-12 panel panel-default">
 
-<h1>Listing Transaccions</h1>
+  <h3 align="center"><b>Transacciones</b></h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>Id</th>
-      <th>External</th>
-      <th>Record</th>
-      <th>Batch</th>
-      <th>Payload</th>
-      <th>Ejecucion</th>
-      <th>Status</th>
-      <th>Tipo transaccion</th>
-      <th>Source</th>
-      <th>Target</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <br>  <br>
+  <div class="panel panel-default">
 
-  <tbody>
-    <% @transaccions.each do |transaccion| %>
-      <tr>
-        <td><%= transaccion.id %></td>
-        <td><%= transaccion.external_id %></td>
-        <td><%= transaccion.record_id %></td>
-        <td><%= transaccion.batch_id %></td>
-        <td><%= transaccion.payload %></td>
-        <td><%= transaccion.ejecucion %></td>
-        <td><%= transaccion.status %></td>
-        <td><%= transaccion.tipo_transaccion %></td>
-        <td><%= transaccion.source_id %></td>
-        <td><%= transaccion.target_id %></td>
-        <td><%= link_to 'Show', transaccion %></td>
-        <td><%= link_to 'Edit', edit_transaccion_path(transaccion) %></td>
-        <td><%= link_to 'Destroy', transaccion, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <% content_for :search do %>
+        <div class="large-8 small-9 columns form-group">
+
+          <h2><b><span class="label label-primary" style="background-color: #5bc0de">Búsqueda de Facturas</span></b></h2><br>
+
+          <%= form_tag( facturas_path, method: "get", id:"search-form" ) do  %>
+              <h5>Cantidad de Registros consultados&nbsp;&nbsp;<%= text_field_tag "cantidad", @cantidad, :size => 10, :maxlenght => 4, :placeholder => "Cantidad", :required => "required" %>&nbsp;&nbsp;(Máximo 1000 por consulta)</h5>
+
+              <div class="panel panel-default">
+
+                <div id="bt_plus_filter" class="panel-heading">
+                  <h5>Filtros de Búsqueda &nbsp;&nbsp;<span class="glyphicon glyphicon-plus" aria-hidden="true" id=""></span></h5>
+                </div>
+
+                <div id="filtros" style="display:none;" class="panel-footer">
+                  <br>
+                  <%= text_field_tag :q_UUID, params[:q_UUID], class: "", placeholder: "UUID", :size => 27 %>
+                  <%= text_field_tag :q_RS_origen, params[:RS_origen], class: "", placeholder: "Descripcion", :size => 27 %>
+                  <% if current_user.role == 'admin' %>
+                      <%= text_field_tag :soc_id, params[:soc_id], class: "", placeholder: "Sociedad", :size => 27 %>
+                  <% else %>
+                      <%#= f.select(:soc_id, @societies.collect { |s| [s.descripcion, s.codigo] }, {prompt: 'Seleccione una Sociedad'}) %>
+                  <% end %>
+
+                  <%= text_field_tag :monto, params[:monto], class: "", placeholder: "Monto", :size => 27 %>
+                  <%= text_field_tag :referencia_id, params[:referencia_id], class: "", placeholder: "Referencia", :size => 27 %>
+                  <%= hidden_field_tag :sort_order, @default_order %>
+                  <%= hidden_field_tag :sort_column %>
+                  <br><br>
+
+                  <table border="0" style="width: 100%">
+                    <tr>
+                      <td width="50%">
+                        <h5>Rango de Fecha Emisión</h5>
+                        <%= text_field_tag :fecha_inicio_i, params[:fecha_inicio_i], class: "datepicker f_inicio", placeholder: "Inicio", :size => 27 %>
+                        <%= text_field_tag :fecha_inicio_f, params[:fecha_inicio_f], class: "datepicker f_fin", placeholder: "Fin", :size => 27 %>
+                      </td>
+                      <td>
+                        <h5>Rango de Montos</h5>
+                        <%= text_field_tag :monto_i, params[:monto_i], class: "", placeholder: "Monto Minimo", :size => 27 %>
+                        <%= text_field_tag :monto_f, params[:monto_f], class: "", placeholder: "Monto Máximo", :size => 27 %>
+                      </td>
+                    </tr>
+                  </table>
+                  <br>
+                </div>
+              </div>
+              <button class="btn btn-default btn-lg btn-block" id="btn_search">Buscar</button>
+              <%#= f.submit "Buscar", class: " btn btn-default btn-lg btn-block" %>
+              <!--  <a href="/facturas" class="btn btn-default">Reset</a> -->
+          <% end %>
+        </div>
     <% end %>
-  </tbody>
-</table>
+
+  </div>
+
+    <table border="0"  align="center" class="table table-bordered">
+      <thead class="panel-heading">
+        <tr>
+          <th width="40%">Batch</th>
+          <th width="20%">Status</th>
+          <th width="20%">Tipo transaccion</th>
+          <th width="20%">Detalle</th>
+        </tr>
+      </thead>
+
+      <tbody class="panel-body">
+        <% @transaccions.each do |transaccion| %>
+          <tr>
+            <td><%= transaccion.batch_id %></td>
+            <td><%= transaccion.status %></td>
+            <td><%= transaccion.tipo_transaccion %></td>
+            <td><a href="<%= transaccion.batch_id %>" class="detalle_transacc btn btn-info" style="background-color: #1d89cf; border-color: #1d89cf;">Ver</a> </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+</div>
 
 <br>
 
-<%= link_to 'New Transaccion', new_transaccion_path %>
+<div style="text-align: right;">
+  <%= label_tag :total %>&nbsp;&nbsp;<%= label_tag @count%>
+  <%= paginate @transaccions, :total_pages => @total_pages %>
+</div>
+
+<!-- modal de detalle -->
+<div id="modal-detalle-transaccion" class="modal fade" style="display: none;" role="dialog" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog" style="z-index:1500; width: 750px;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" aria-hidden="true" data-dismiss="modal" type="button">×</button>
+        <h4 class="modal-title">Detalle Transacci&oacute;n</h4>
+      </div>
+      <div class="modal-body transaccion">
+
+      </div>
+    </div>
+  </div>
+</div>
