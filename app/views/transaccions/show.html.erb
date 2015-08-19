@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Id:</strong>
+  <%= @transaccion.id %>
+</p>
+
+<p>
+  <strong>External:</strong>
+  <%= @transaccion.external_id %>
+</p>
+
+<p>
+  <strong>Record:</strong>
+  <%= @transaccion.record_id %>
+</p>
+
+<p>
+  <strong>Batch:</strong>
+  <%= @transaccion.batch_id %>
+</p>
+
+<p>
+  <strong>Payload:</strong>
+  <%= @transaccion.payload %>
+</p>
+
+<p>
+  <strong>Ejecucion:</strong>
+  <%= @transaccion.ejecucion %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @transaccion.status %>
+</p>
+
+<p>
+  <strong>Tipo transaccion:</strong>
+  <%= @transaccion.tipo_transaccion %>
+</p>
+
+<p>
+  <strong>Source:</strong>
+  <%= @transaccion.source_id %>
+</p>
+
+<p>
+  <strong>Target:</strong>
+  <%= @transaccion.target_id %>
+</p>
+
+<%= link_to 'Edit', edit_transaccion_path(@transaccion) %> |
+<%= link_to 'Back', transaccions_path %>

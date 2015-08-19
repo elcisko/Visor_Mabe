@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 1
+  external_id: MyString
+  record_id: MyString
+  batch_id: MyString
+  payload: MyString
+  ejecucion: MyString
+  status: MyString
+  tipo_transaccion: 1
+  source_id: 1
+  target_id: 1
+
+two:
+  id: 1
+  external_id: MyString
+  record_id: MyString
+  batch_id: MyString
+  payload: MyString
+  ejecucion: MyString
+  status: MyString
+  tipo_transaccion: 1
+  source_id: 1
+  target_id: 1

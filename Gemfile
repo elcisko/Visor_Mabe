@@ -1,10 +1,7 @@
 source 'https://rubygems.org'
-ruby '1.9.3', :engine => 'jruby', :engine_version => '1.7.17'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.3'
-# Use jdbcsqlite3 as the database for Active Record
-gem 'activerecord-jdbcsqlite3-adapter'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -22,7 +19,7 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-gem 'jdbc-mysql', '~> 5.1.33'
+gem 'mysql2'
 
 gem 'bootstrap-sass'
 
@@ -39,8 +36,6 @@ gem 'pundit'
 gem 'select-multiple-rails'
 
 gem 'kaminari'
-
-#gem 'ruby-sapjco'
 
 gem 'lazy_high_charts'
 

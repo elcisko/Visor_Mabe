@@ -5,25 +5,28 @@ default: &default
   timeout: 5000
 
 development:
+#test:
   <<: *default
   database: fiscalhub_mabe
   username: root
   password: 123456
   port: 3306
-  host: 192.168.43.166
+  host: 192.168.43.161
 
+#development:
 test:
   <<: *default
-  database: fiscalhub_local
+  database: imss_demo
   username: root
-  password: 123456
+  password: TG2014
   port: 3306
-  host: 192.168.1.100
+  host: 65.181.125.83
 
 production:
   <<: *default
-  database: fiscalhub_local
+  database: imss_demo
   username: root
-  password: 123456
+  password: TG2014
   port: 3306
-  host: 192.168.1.100
+  host: 65.181.125.83
+

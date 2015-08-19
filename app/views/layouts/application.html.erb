@@ -70,7 +70,7 @@
   * 'main-menu-fixed'    - Fixes the main menu
   * 'main-menu-animated' - Animate main menu
   -->
-  <body class="theme-default <% if user_signed_in? and (current_user.role == 'admin') %>main-menu-animated animate-mm-sm animate-mm-md animate-mm-lg <% else %> no-main-menu<% end %>">
+  <body class="theme-default <% if user_signed_in? %>main-menu-animated animate-mm-sm animate-mm-md animate-mm-lg <% else %> no-main-menu<% end %>">
     <!-- no-main-menu -->
     <script>var init = [];</script>
     <div id="main-wrapper">
@@ -99,12 +99,6 @@
           <ul class="nav navbar-nav">
             <li>
               <% if user_signed_in? %>
-                <% if current_user.role == 'admin' or current_user.role == 'manager_account' %>
-                  <a href="/admin/index">Inicio</a>
-                <% else %>
-                  <%= link_to "Inicio", root_path %>  
-                <% end %>
-              <% else %>
                 <%= link_to "Inicio", root_path %>
               <% end %>
             </li>
@@ -159,10 +153,6 @@
 
                         <% if current_user.role == 'user' %>
                           <li><%= link_to 'Editar Cuenta', edit_user_registration_path %></li>
-                          <% if current_user.provider_code != '' %>
-                            <li><%= link_to 'Pedidos', orders_path %></li>
-                          <% end %>
-                          <li class="divider"></li>
                         <% end %>
                       
                       <li>
@@ -235,10 +225,35 @@
                 <span class="mm-text mmc-dropdown-delay animated fadeIn">Listar Usuarios</span>
               </a>
             </li>
+            <li>
+              <a href="/transaccions">
+                <i class="menu-icon  fa fa-bars"></i>
+                <span class="mm-text mmc-dropdown-delay animated fadeIn">Transacciones</span>
+              </a>
+            </li>
           </ul>
         </div>
       </div>
-    <% end %>
+    <% else %>
+          <div id="main-menu" role="navigation">
+            <div id="main-menu-inner" style="overflow: hidden; width: auto; height: 100%;">
+              <div class="menu-content top animated fadeIn">
+                <div class="text-bg">
+                  <span class="text-semibold" style="color: #fff;">Men&uacute;</span>
+                </div>
+
+              </div>
+              <ul class="navigation">
+                <li>
+                  <a href="/transaccions">
+                    <i class="menu-icon  fa fa-bars"></i>
+                    <span class="mm-text mmc-dropdown-delay animated fadeIn">Transacciones</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+      <% end %>
   <% end %>
   <div id="content-wrapper">
     <!-- 5. $CONTENT ===================================================================================
@@ -247,7 +262,7 @@
     <%= yield %>
 
   </div> <!-- / #content-wrapper -->
-  <% if user_signed_in? and (current_user.role == 'admin' or current_user.role == 'manager_account') %>
+  <% if user_signed_in? %>
     <div id="main-menu-bg"></div>
   <% end %>
 </div> <!-- / #main-wrapper -->

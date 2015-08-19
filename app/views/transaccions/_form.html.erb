@@ -1,0 +1,57 @@
+<%= form_for(@transaccion) do |f| %>
+  <% if @transaccion.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@transaccion.errors.count, "error") %> prohibited this transaccion from being saved:</h2>
+
+      <ul>
+      <% @transaccion.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :id %><br>
+    <%= f.number_field :id %>
+  </div>
+  <div class="field">
+    <%= f.label :external_id %><br>
+    <%= f.text_field :external_id %>
+  </div>
+  <div class="field">
+    <%= f.label :record_id %><br>
+    <%= f.text_field :record_id %>
+  </div>
+  <div class="field">
+    <%= f.label :batch_id %><br>
+    <%= f.text_field :batch_id %>
+  </div>
+  <div class="field">
+    <%= f.label :payload %><br>
+    <%= f.text_field :payload %>
+  </div>
+  <div class="field">
+    <%= f.label :ejecucion %><br>
+    <%= f.text_field :ejecucion %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br>
+    <%= f.text_field :status %>
+  </div>
+  <div class="field">
+    <%= f.label :tipo_transaccion %><br>
+    <%= f.number_field :tipo_transaccion %>
+  </div>
+  <div class="field">
+    <%= f.label :source_id %><br>
+    <%= f.number_field :source_id %>
+  </div>
+  <div class="field">
+    <%= f.label :target_id %><br>
+    <%= f.number_field :target_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

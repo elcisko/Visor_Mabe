@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :transaccions
   devise_for :users
   scope "/admin" do
     resources :users
