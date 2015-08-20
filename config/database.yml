@@ -10,7 +10,8 @@ development:
   username: root
   password: 123456
   port: 3306
-  host: 192.168.43.161
+  #host: 192.168.43.161
+  host: 192.168.1.100
 
 test:
   <<: *default
@@ -26,5 +27,5 @@ production:
   username: root
   password: TG2014
   port: 3306
-  host: 65.181.125.83
+  host: localhost
 
