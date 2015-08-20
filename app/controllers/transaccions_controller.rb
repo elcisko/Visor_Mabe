@@ -24,7 +24,7 @@ class TransaccionsController < ApplicationController
       @default_order = params[:sort_order] == 'desc' ? 'asc' : 'desc'
     end
 
-    @transaccions = apply_scopes(Transaccion).limit(@cantidad).select('distinct batch_id, status, tipo_transaccion').where('batch_id IS NOT NULL').order(order_by).page(params[:page]).per(@por_pag)
+    @transaccions = apply_scopes(Transaccion).limit(@cantidad).select('distinct batch_id, status, tipo_transaccion, source_id, target_id').where('batch_id IS NOT NULL').order(order_by).page(params[:page]).per(@por_pag)
     @count = apply_scopes(Transaccion).count('distinct batch_id')
 
     if @count.to_i > @cantidad.to_i
@@ -83,7 +83,7 @@ class TransaccionsController < ApplicationController
       @default_order = params[:sort_order] == 'desc' ? 'asc' : 'desc'
     end
 
-    @transaccions = apply_scopes(Transaccion).limit(@cantidad).select('distinct external_id, status, tipo_transaccion').where('batch_id IS NULL').order(order_by).page(params[:page]).per(@por_pag)
+    @transaccions = apply_scopes(Transaccion).limit(@cantidad).select('distinct external_id, status, tipo_transaccion, source_id, target_id').where('batch_id IS NULL').order(order_by).page(params[:page]).per(@por_pag)
     @count = apply_scopes(Transaccion).where('batch_id IS NULL').count('distinct external_id')
 
     if @count.to_i > @cantidad.to_i

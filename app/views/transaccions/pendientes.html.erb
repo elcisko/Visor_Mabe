@@ -45,9 +45,11 @@
     <thead class="panel-heading">
     <tr>
       <th width="25%"><a href="external_id" class="sort">External Id <img src="/assets/<% if @default_order == 'desc'%>up.gif<% else %>down.gif<% end %>" /></a></th>
-      <th width="25%"><a href="status" class="sort">Status <img src="/assets/<% if @default_order == 'desc'%>up.gif<% else %>down.gif<% end %>" /></a></th>
-      <th width="25%"><a href="tipo_transaccion" class="sort">Tipo transaccion <img src="/assets/<% if @default_order == 'desc'%>up.gif<% else %>down.gif<% end %>" /></a></th>
-      <th width="25%">Detalle</th>
+      <th width="15%"><a href="status" class="sort">Status <img src="/assets/<% if @default_order == 'desc'%>up.gif<% else %>down.gif<% end %>" /></a></th>
+      <th width="15%"><a href="tipo_transaccion" class="sort">Tipo transaccion <img src="/assets/<% if @default_order == 'desc'%>up.gif<% else %>down.gif<% end %>" /></a></th>
+      <th width="15%"><a href="source_id" class="sort">IMMS<img src="/assets/<% if @default_order == 'desc'%>up.gif<% else %>down.gif<% end %>" /></a></th>
+      <th width="15%"><a href="target_id" class="sort">IPC <img src="/assets/<% if @default_order == 'desc'%>up.gif<% else %>down.gif<% end %>" /></a></th>
+      <th width="15%">Detalle</th>
     </tr>
     </thead>
 
@@ -57,6 +59,8 @@
           <td><%= transaccion.external_id %></td>
           <td><%= transaccion.status %></td>
           <td><%= transaccion.tipo_transaccion %></td>
+          <td><%= transaccion.source_id %></td>
+          <td><%= transaccion.target_id %></td>
           <td><a href="<%= transaccion.external_id %>" class="detalle_externo btn btn-info" style="background-color: #1d89cf; border-color: #1d89cf;">Ver</a> </td>
         </tr>
     <% end %>
