@@ -4,8 +4,8 @@ default: &default
   pool: 5
   timeout: 5000
 
-development:
-#test:
+#development:
+test:
   <<: *default
   database: fiscalhub_mabe
   username: root
@@ -13,8 +13,8 @@ development:
   port: 3306
   host: 192.168.43.161
 
-#development:
-test:
+development:
+#test:
   <<: *default
   database: imss_demo
   username: root
