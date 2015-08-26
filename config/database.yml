@@ -10,7 +10,8 @@ development:
   username: root
   password: 123456
   port: 3306
-  host: 192.168.43.161
+  #host: 192.168.43.161
+  host: 192.168.1.100
 
 test:
   <<: *default
@@ -27,4 +28,5 @@ production:
   password: RubyTe$ch2015
   port: 3306
   host: 52.20.128.239
+
 

@@ -88,7 +88,7 @@
         <div class="navbar-header">
           <!-- Logo -->
           <a href="http://www.fiscalhub.net" target="_blank">
-            <div><img height="50px" src="/assets/logo.png"></div>
+            <div><img height="50px" src="/assets/logo_mabe.png"></div>
           </a>
           <!-- Main navbar toggle -->
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar-collapse">
@@ -222,30 +222,30 @@
               <% if current_user.role == 'admin' %>
                   <li>
                     <a href="/users/new">
-                      <!--<i class="menu-icon  fa fa-plus"></i>-->
-                      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                      <i class="menu-icon  fa fa-plus"></i>
+                      <!--<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>-->
                       <span class="mm-text mmc-dropdown-delay animated fadeIn">Crear Usuario</span>
                     </a>
                   </li>
                   <li>
                     <a href="/users">
-                      <!-- <i class="menu-icon  fa fa-user"></i> -->
-                      <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                      <i class="menu-icon  fa fa-user"></i>
+                      <!--<span class="glyphicon glyphicon-user" aria-hidden="true"></span>-->
                       <span class="mm-text mmc-dropdown-delay animated fadeIn">Listar Usuarios</span>
                     </a>
                   </li>
               <% end %>
               <li>
                 <a href="/transaccions">
-                  <!-- <i class="menu-icon  fa fa-share-square"></i> -->
-                  <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
+                  <i class="menu-icon  fa fa-share-square"></i>
+                  <!--<span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>-->
                   <span class="mm-text mmc-dropdown-delay animated fadeIn">Transacciones Enviadas</span>
                 </a>
               </li>
               <li>
                 <a href="/transaccions/pendientes/0">
-                <!--  <i class="menu-icon  fa fa-exclamation-triangle"></i> -->
-                  <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                  <i class="menu-icon  fa fa-exclamation-triangle"></i>
+                  <!-- <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>-->
                   <span class="mm-text mmc-dropdown-delay animated fadeIn">Transacciones Por Enviar</span>
                 </a>
               </li>
