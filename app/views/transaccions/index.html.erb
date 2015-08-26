@@ -50,11 +50,12 @@
     <table border="0"  align="center" class="table table-bordered">
       <thead class="panel-heading">
         <tr>
-          <th width="25%"><a href="batch_id" class="sort">Batch <img src="/assets/<% if @default_order == 'desc'%>up.gif<% else %>down.gif<% end %>" /></a></th>
+          <th width="20%"><a href="batch_id" class="sort">Batch_id <img src="/assets/<% if @default_order == 'desc'%>up.gif<% else %>down.gif<% end %>" /></a></th>
+          <th width="15%">Descargas</th>
           <th width="15%"><a href="status" class="sort">Status <img src="/assets/<% if @default_order == 'desc'%>up.gif<% else %>down.gif<% end %>" /></a></th>
-          <th width="15%"><a href="tipo_transaccion" class="sort">Tipo transaccion <img src="/assets/<% if @default_order == 'desc'%>up.gif<% else %>down.gif<% end %>" /></a></th>
-          <th width="15%"><a href="source_id" class="sort">Origen<img src="/assets/<% if @default_order == 'desc'%>up.gif<% else %>down.gif<% end %>" /></a></th>
-          <th width="15%"><a href="target_id" class="sort">Destino<img src="/assets/<% if @default_order == 'desc'%>up.gif<% else %>down.gif<% end %>" /></a></th>
+          <th width="15%"><a href="tipo_transaccion" class="sort">Tipo Transaccion <img src="/assets/<% if @default_order == 'desc'%>up.gif<% else %>down.gif<% end %>" /></a></th>
+          <th width="10%"><a href="source_id" class="sort">Origen<img src="/assets/<% if @default_order == 'desc'%>up.gif<% else %>down.gif<% end %>" /></a></th>
+          <th width="10%"><a href="target_id" class="sort">Destino<img src="/assets/<% if @default_order == 'desc'%>up.gif<% else %>down.gif<% end %>" /></a></th>
           <th width="15%">Detalle</th>
         </tr>
       </thead>
@@ -62,11 +63,19 @@
       <tbody class="panel-body">
         <% @transaccions.each do |transaccion| %>
           <tr>
+            <td><%= transaccion.batch_id %></td>
             <td>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <%if File.exist?(Rails.root.join('public/archivos', "Ordenes_#{transaccion.batch_id}.csv")) %>
-                <%= link_to transaccion.batch_id, :action=> :download, :file_name => "Ordenes_#{transaccion.batch_id}", :style => "background-color: #1d89cf; border-color: #1d89cf;"%>
+                <%= link_to "CSV", :action=> :download_csv, :file_name => "Ordenes_#{transaccion.batch_id}.csv", :style => "background-color: #1d89cf; border-color: #1d89cf;"%>
               <% else %>
-                  <%= transaccion.batch_id %>
+                    CSV
+              <%end%>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <%if File.exist?(Rails.root.join('public/archivos', "Ordenes_#{transaccion.batch_id}.edi")) %>
+                  <%= link_to "EDI", :action=> :download_edi, :file_name => "Ordenes_#{transaccion.batch_id}.edi", :style => "background-color: #1d89cf; border-color: #1d89cf;"%>
+              <% else %>
+                    EDI
               <%end%>
             </td>
             <td><%= transaccion.status %></td>

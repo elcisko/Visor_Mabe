@@ -25,7 +25,9 @@ Rails.application.routes.draw do
 
   match 'transaccions/payload/:id' => 'transaccions#payload', :as =>'transaccions_payload', via: 'get'
 
-  match 'transaccions/download/:file_name' => 'transaccions#download', :as => 'transaccions_download', via: 'get'
+  match 'transaccions/download_csv/:file_name' => 'transaccions#download_csv', :as => 'transaccions_download_csv', via: 'get'
+
+  match 'transaccions/download_edi/:file_name' => 'transaccions#download_edi', :as => 'transaccions_download_edi', via: 'get'
 
   match 'transaccions/pendientes/:id' => 'transaccions#pendientes', :as =>'transaccions_pendientes', via: 'get'
 

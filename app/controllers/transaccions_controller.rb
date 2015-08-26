@@ -111,10 +111,14 @@ class TransaccionsController < ApplicationController
   end
 
 
-  def download
+  def download_csv
     @archivo = Rails.root.join('public/archivos', "#{params[:file_name]}.csv")
     send_file @archivo
+  end
 
+  def download_edi
+    @archivo = Rails.root.join('public/archivos', "#{params[:file_name]}.edi")
+    send_file @archivo
   end
 
   def payload
