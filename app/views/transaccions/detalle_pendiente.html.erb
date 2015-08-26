@@ -26,7 +26,7 @@
           <td><%= transaccion.tipo_transaccion %></td>
           <td><%= transaccion.source_id %></td>
           <td><%= transaccion.target_id %></td>
-          <td><a href="#" onclick="detalle_payload(<%= transaccion.id %>)"  class="detalle_payload btn btn-info" style="background-color: #1d89cf; border-color: #1d89cf;">Ver</a> </td>
+          <td><a href="#" onclick="detalle_payload('<%= transaccion.id %>')"  class="detalle_payload btn btn-info" style="background-color: #1d89cf; border-color: #1d89cf;">Ver</a> </td>
         </tr>
     <% end %>
     </tbody>
