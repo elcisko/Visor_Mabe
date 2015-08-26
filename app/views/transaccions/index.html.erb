@@ -65,7 +65,6 @@
           <tr>
             <td><%= transaccion.batch_id %></td>
             <td>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <%if File.exist?(Rails.root.join('public/archivos', "Ordenes_#{transaccion.batch_id}.csv")) %>
                 <%= link_to "CSV", :action=> :download_csv, :file_name => "Ordenes_#{transaccion.batch_id}.csv", :style => "background-color: #1d89cf; border-color: #1d89cf;"%>
               <% else %>
