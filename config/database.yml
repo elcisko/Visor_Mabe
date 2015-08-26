@@ -15,7 +15,7 @@ development:
 
 test:
   <<: *default
-  database: imss_demo
+  database: imss
   username: uruby
   password: RubyTe$ch2015
   port: 3306
@@ -23,7 +23,7 @@ test:
 
 production:
   <<: *default
-  database: imss_demo
+  database: imss
   username: uruby
   password: RubyTe$ch2015
   port: 3306
